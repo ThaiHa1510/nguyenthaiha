@@ -19,7 +19,7 @@
 ## API Endpoints
 
 * `GET /api/scores/top`: Get top 10 user’s scores.
-* `PUT /api/scores/:id`: Update a score
+* `PUT /api/scores/`: Update a score
 ```mermaid
     graph TD
         A[User Action] -->|Dispatch API Call| B[POST /api/score/update]

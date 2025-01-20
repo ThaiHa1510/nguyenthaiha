@@ -23,7 +23,6 @@ db.on('error', (err) => {
 });
 
 db.once('open', () => {
-  console.log('Connected to MongoDB');
   app.listen(3000, () => {
     console.log('Server listening on port 3000');
   });

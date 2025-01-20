@@ -38,5 +38,30 @@ export const USER_MESSAGES = {
     EMAIL_VERIFICATION_LINK_EXPIRED: 'Email verification link expired',
     EMAIL_VERIFICATION_TOKEN_INVALID: 'Email verification token invalid',
     ERROR_REGISTERING: 'Error registering user',
+    MISSING_FIELDS: 'Missing fields',
+
+};
+
+
+export const SCORE_MESSAGES = {
+    SCORE_UPDATED: 'Score updated successfully',
+    SCORE_RETRIEVED: 'Score retrieved successfully',
+    SCORE_DELETED: 'Score deleted successfully',
+    SCORE_EXISTS: 'Score already exists',
+    SCORE_NOT_FOUND: 'Score not found',
+    ERROR_UPDATING_SCORE: 'Error updating score',
+    MISSING_FIELDS: 'Missing fields',
+    INVALID_SCORE: 'Invalid score',
+    SCORE_NOT_PROVIDED: 'Score not provided',
+};
+
+export const JWT_MESSAGES = {
+    TOKEN_EXPIRED: 'Token expired',
+    TOKEN_INVALID: 'Token invalid',
+    TOKEN_REVOKED: 'Token revoked',
+    TOKEN_REQUIRED: 'Token required',
+    SECRET_KEY_NOT_DEFINED: 'SECRET_KEY is not defined',
+    REFRESH_SECRET_KEY_NOT_DEFINED: 'REFRESH_SECRET_KEY is not defined',
+    USER_REQUIRED: 'User is required',
 
 };

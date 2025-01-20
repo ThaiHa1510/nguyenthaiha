@@ -1,5 +1,7 @@
+@token = token
+@baseUrl = http://localhost:3000
 ### Register User
-POST http://localhost:3000/api/users/register HTTP/1.1
+POST {{baseUrl}}/api/users/register HTTP/1.1
 Content-Type: application/json
 
 {
@@ -9,28 +11,63 @@ Content-Type: application/json
 }
 
 ### Login User
-POST http://localhost:3000/api/auth/login HTTP/1.1
+# @name  loginrequest
+POST {{baseUrl}}/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
   "email": "johndoe@example.com",
   "password": "password123"
 }
-
+###
+@token = {{loginrequest.response.body.$.token}}
 ### Get User Profile
-GET http://localhost:3000/api/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhlMDExMzUwZThjZDgwMjM3OWE1ZTIiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzczNTk4NTksImV4cCI6MTczNzM2MzQ1OX0.kkzfKvaRjZDGK0u8Qg9Sza03ZAe66SZWh0usRNX9H9I
-
-### Update User Profile
-PUT http://localhost:3000/api/profile HTTP/1.1
-Authorization: Bearer YOUR_TOKEN_HERE
-Content-Type: application/json
-
-{
-  "name": "Jane Doe",
-  "email": "janedoe@example.com"
-}
+GET {{baseUrl}}/api/users/profile HTTP/1.1
+Authorization: Bearer {{token}}
 
 ### Delete User Profile
-DELETE http://localhost:3000/api/profile HTTP/1.1
-Authorization: Bearer YOUR_TOKEN_HERE
+DELETE {{baseUrl}}/api/users/profile HTTP/1.1
+Authorization: Bearer {{token}}
+
+
+### Update Score
+PUT {{baseUrl}}/api/scores
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "score": 10
+}
+
+### Get Top Scores
+GET {{baseUrl}}/api/scores/top
+Authorization: Bearer {{token}}
+
+### Get Resources
+GET {{baseUrl}}/api/resources?description=description HTTP/1.1
+Content-Type: application/json
+
+### Create Resource
+POST {{baseUrl}}/api/resources HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "resource2",
+  "description": "description2"
+}
+
+### Update Resource
+PUT {{baseUrl}}/api/resources/678e7fd16ab2e3b0a515002b HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "resource updated",
+  "description": "description1 updated"
+}
+
+### Delete Resource
+DELETE  {{baseUrl}}/api/resources/678e7fd16ab2e3b0a515002b HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json

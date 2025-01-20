@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Resource from '../models/resource.model';
-import { RESOURCE_MESSAGES } from '../utils/constants';
+import { ERROR_MESSAGES, RESOURCE_MESSAGES } from '../utils/constants';
 import { authenticate } from '../middlewares/auth.middleware';
 /**
  * Creates a new resource from the given request body.
@@ -12,19 +12,37 @@ import { authenticate } from '../middlewares/auth.middleware';
  */
 export const createResource = async (req: Request, res: Response) => {
   authenticate(req, res, async () => {
-    const resource = new Resource(req.body);
+    const { name, description } = req.body;
+    const resource = new Resource({ name, description });
     try {
       await resource.save();
       res.status(201).json(resource);
     } catch (err) {
       res.status(400).json({ message: RESOURCE_MESSAGES.CREATE_FAILED });
-    }
+      console.log(err);
+    }  
   });
 };
 
 export const getResources = async (req: Request, res: Response) => {
-  const resources = await Resource.find().exec();
-  res.json(resources);
+  const { name, description, page = 1, limit = 10 } = req.query;
+  const query: any = {};
+  if (name && typeof name === 'string') {
+    query.name = { $regex: new RegExp(name, 'i') };
+  }
+  if (description && typeof description === 'string') {
+    query.description = { $regex: new RegExp(description, 'i') };
+  }
+  try {
+    const resources = await Resource.find(query)
+      .skip((+page - 1) * +limit)
+      .limit(+limit)
+      .exec();
+    res.json(resources);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+  }
 };
 
 /**

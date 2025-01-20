@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from 'bcrypt';
 
-var userSchema: Schema = new Schema({
+const userSchema: Schema = new Schema({
         email: { type: String, required: true, unique: true },
         password: { type: String, required: true },
         scores: { type: String, ref: 'Score' },

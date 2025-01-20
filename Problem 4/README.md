@@ -20,15 +20,16 @@
 
 * `GET /api/scores/top`: Get top 10 user’s scores.
 * `PUT /api/scores/:id`: Update a score
-graph TD
-    A[User Action] -->|Dispatch API Call| B[POST /api/score/update]
-    B -->|Validate Token| C[Auth Service]
-    C -->|Token Valid| D[Update Score in DB]
-    D -->|Update Successful| E[Send Success Response]
-    E --> F[Notify Frontend via WebSocket]
-    F --> G[Update Scoreboard UI]
-    C -->|Token Invalid| H[Send Error Response]
-
+```mermaid
+    graph TD
+        A[User Action] -->|Dispatch API Call| B[POST /api/score/update]
+        B -->|Validate Token| C[Auth Service]
+        C -->|Token Valid| D[Update Score in DB]
+        D -->|Update Successful| E[Send Success Response]
+        E --> F[Notify Frontend via WebSocket]
+        F --> G[Update Scoreboard UI]
+        C -->|Token Invalid| H[Send Error Response]
+```
 # Additional Comments
 
 Real-time Updates: For live updates, consider using WebSocket or Server-Sent Events (SSE) to push updates to the frontend whenever the scores are updated.

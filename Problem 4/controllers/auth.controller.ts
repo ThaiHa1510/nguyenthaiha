@@ -8,9 +8,9 @@ export const signIn = async (req: Request, res: Response) => {
   if (!user || !(await user.comparePassword(password))) {
     res.status(401).json({ message: 'Invalid email or password' });
   }
-
-  const token = generateToken(user);
-  const refreshToken = generateRefreshToken(user);
+  const userModel = new User(user);
+  const token = generateToken(userModel);
+  const refreshToken = generateRefreshToken(userModel);
 
   res.json({ token, refreshToken });
 };

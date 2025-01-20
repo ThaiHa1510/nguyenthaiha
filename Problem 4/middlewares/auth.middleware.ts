@@ -4,7 +4,6 @@ import User from '../models/user.model';
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('Authorization');
-
   if (!token) {
     return res.status(401).json({ message: 'Access denied. No token provided.' });
   }
@@ -13,7 +12,7 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     if (!process.env.SECRET_KEY) {
       return res.status(500).json({ message: 'Internal server error. Secret key not provided.' });
     }
-    const decoded = verify(token, process.env.SECRET_KEY);
+    const decoded = verify(token.split(' ')[1], process.env.SECRET_KEY);
     const user = await User.findById((decoded as JwtPayload).userId);
 
     if (!user) {

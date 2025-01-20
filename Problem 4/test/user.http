@@ -1,0 +1,36 @@
+### Register User
+POST http://localhost:3000/api/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+
+### Login User
+POST http://localhost:3000/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com",
+  "password": "password123"
+}
+
+### Get User Profile
+GET http://localhost:3000/api/profile HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzhlMDExMzUwZThjZDgwMjM3OWE1ZTIiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJpYXQiOjE3MzczNTk4NTksImV4cCI6MTczNzM2MzQ1OX0.kkzfKvaRjZDGK0u8Qg9Sza03ZAe66SZWh0usRNX9H9I
+
+### Update User Profile
+PUT http://localhost:3000/api/profile HTTP/1.1
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "email": "janedoe@example.com"
+}
+
+### Delete User Profile
+DELETE http://localhost:3000/api/profile HTTP/1.1
+Authorization: Bearer YOUR_TOKEN_HERE

@@ -34,7 +34,7 @@
   "scripts": {
     "test": "jest",
     "build": "npx tsc",
-    "start": "node dist/app.js",
+    "start": "npx tsc && node dist/app.js",
     "lint": "eslint ."
   },
   "keywords": [],
